@@ -3,10 +3,6 @@ var color1 = document.querySelector(".color1");
 var color2 = document.querySelector(".color2");
 var body = document.getElementById("gradient");
 
-var defaultGradient = getComputedStyle(body).background; //extacting CSS gradient value
-var rgb1 = defaultGradient.slice(26, 40); //splicing for individual RGB values
-var rgb2 = defaultGradient.slice(42, 58);
-
 function RGBToHex(rgb) {
   //RGB to Hex conversion function
   // Choose correct separator
@@ -25,11 +21,19 @@ function RGBToHex(rgb) {
   return "#" + r + g + b;
 }
 
-var hex1 = RGBToHex(rgb1); //Converting default RGB to hex
-var hex2 = RGBToHex(rgb2);
+function onLoadSet() {
+  //function called on page load
+  var defaultGradient = getComputedStyle(body).background; //extacting CSS gradient value
+  var rgb1 = defaultGradient.slice(26, 40); //splicing for individual RGB values
+  var rgb2 = defaultGradient.slice(42, 58);
 
-color1.value = hex1; //Updating input color element to default values
-color2.value = hex2;
+  hex1 = RGBToHex(rgb1); //Converting default RGB to hex
+  hex2 = RGBToHex(rgb2);
+
+  color1.value = hex1; //Updating input color element to default values
+  color2.value = hex2;
+  setGradient();
+}
 
 function printGradient() {
   // print the current gradient
@@ -42,8 +46,6 @@ function setGradient() {
     "linear-gradient(to right, " + color1.value + ", " + color2.value + ")";
   printGradient();
 }
-
-setGradient(); //set and display current gradient
 
 function randomRgbParameter() {
   //create a random number between 0 and 255
