@@ -3,12 +3,15 @@ let color1 = document.querySelector(".color1");
 let color2 = document.querySelector(".color2");
 let body = document.getElementById("gradient");
 
+color1.addEventListener("input", setGradient); //listening to color input events
+
+color2.addEventListener("input", setGradient);
+
+onLoadSet(); //set color picker values to css values on first page load
+
 function RGBToHex(rgb) {
   //RGB to Hex conversion function
-  // Choose correct separator
-  let sep = rgb.indexOf(",") > -1 ? "," : " ";
-  // Turn "rgb(r,g,b)" into [r,g,b]
-  rgb = rgb.substr(4).split(")")[0].split(sep);
+  rgb = rgb.substr(4).split(")")[0].split(",");
 
   let r = (+rgb[0]).toString(16),
     g = (+rgb[1]).toString(16),
@@ -27,7 +30,7 @@ function randomRgbParameter() {
 }
 
 function onLoadSet() {
-  //function called on page load
+  //function called on page load to set color picker values to CSS values
   let [rgb1, rgb2] =
     getComputedStyle(body).backgroundImage.match(/rgb\(.+?\)/g); //extacting CSS gradient value
 
@@ -77,7 +80,3 @@ function randomColors() {
   color1.value = RGBToHex(col1); //Updating input color element to new values
   color2.value = RGBToHex(col2);
 }
-
-color1.addEventListener("input", setGradient); //listening to color input events
-
-color2.addEventListener("input", setGradient);
