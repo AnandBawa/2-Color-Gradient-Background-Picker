@@ -23,7 +23,7 @@ function RGBToHex(rgb) {
 
 function onLoadSet() {
   //function called on page load
-  var defaultGradient = getComputedStyle(body).background; //extacting CSS gradient value
+  var defaultGradient = getComputedStyle(body).backgroundImage; //extacting CSS gradient value
   var rgb1 = defaultGradient.slice(26, 40); //splicing for individual RGB values
   var rgb2 = defaultGradient.slice(42, 58);
 
